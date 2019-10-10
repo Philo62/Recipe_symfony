@@ -1,0 +1,20 @@
+/*body{
+    background-image: url(../img/tonimage.jpg);
+}*/
+
+.card{
+    margin:auto;
+    height: 650px;
+    position: relative;
+}
+.card img{
+    height: 200px;
+}
+
+.acces{
+    position: absolute;
+    white-space: nowrap;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%,0);
+}

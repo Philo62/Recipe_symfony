@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recipe{% endblock %}
+
+{% block body %}
+    <h1>{{recipe.title}}</tag></h1>
+
+        <div class="tags">
+            <h2>Tags</h2>
+            {% for tag in recipe.tags %}
+               <div class="badge badge-pill badge-dark mr-2">
+                    {{tag.name}}
+            </div> 
+            {% endfor %}
+        </div>
+        {{ recipe.title }} 
+        
+        <div class="col-lg-3">
+            <img src="{{ recipe.picture }}" class="w-100" alt="">
+        </div>
+        
+        <p class="mt-2"> <strong>Temps de preparation</strong> {{ recipe.preparationTime}} min || <strong>Temps de cuisson: </strong> {{recipe.cookingTime }} min</p>
+         <p>Estimation du prix: {{recipe.price}} €</p>
+        <p class="card-text text-dark">{{recipe.description}}</p>
+
+        <div class="ingredients">
+            {% for ingredient in recipe.ingredients %}
+               <div class="badge badge-pill badge-warning mr-2">
+                   {{ingredient.quantity}} {{ingredient.units}} {{ingredient.name}}
+            </div> 
+            {% endfor %}
+        </div>
+
+        <div class="kitchenTools">
+            {% for kitchen in recipe.kitchenTools %}
+               <div class="badge badge-pill badge-dark mr-2">
+                   {{kitchen.name}}
+            </div> 
+            {% endfor %}
+        </div>
+    <div class="card bg-info w-50 h-50">
+        <ul class="steps">
+            {% for step in recipe.steps %}
+                <li><strong>Step {{step.spot}}: </strong>{{step.description}}</li>
+            {% endfor %}
+        </ul>
+         </div>
+
+    <a href="{{ path('recipe_index') }}">Retour liste de recettes</a>
+
+    <a href="{{ path('recipe_edit', {'id': recipe.id}) }}">Modifier</a>
+
+    {{ include('recipe/_delete_form.html.twig') }}
+{% endblock %}

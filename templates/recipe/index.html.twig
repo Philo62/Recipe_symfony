@@ -1,0 +1,62 @@
+
+{% extends 'base.html.twig' %}
+
+{#  {% block title %}Recipe index{% endblock %} #}
+
+{% block body %}
+{# <h1>Liste de recettes</h1> #}
+
+
+{# <div class="card-header">Header</div> #}
+<div class="card-body">
+    <h4 class="card-title">Liste des recettes</h4>
+    <p class="card-text">Présentation de quelques recettes</p>
+</div>
+</div>
+
+<div class="col-12 d-flex flex-wrap justify-content-between">
+{% for recipe in recipes %}
+    <div class="card text-white bg-warning mb-3 " style="max-width: 20rem;">
+    
+        <div class="card-body">
+            <div class="mb-3">
+            <h5>Tags</h5>
+            
+            {% for tag in recipe.tags %}
+               <div class="badge badge-pill badge-dark mr-2">
+                    {{tag.name}}
+            </div> 
+            {% endfor %}
+            </div>
+            <img src="{{recipe.picture}}" class="w-100 mb-3" alt="">
+            <h4 class="card-title">{{recipe.title}}</h4>
+            
+            <small> <strong>Temps de preparation</strong> {{ recipe.preparationTime}} min || <strong>Temps de cuisson: </strong> {{recipe.cookingTime }} min</small>
+            <p class="card-text text-dark">{{recipe.description}}</p>
+            <div class="mb-3">
+            <h5>Ingredient</h5>
+            
+            {% for ingredient in recipe.ingredients %}
+               <div class="badge badge-pill badge-light mr-2">
+                   {{ingredient.quantity}} {{ingredient.units}} {{ingredient.name}}
+            </div> 
+            {% endfor %}
+            </div>
+            
+            <h5>Prix: {{recipe.price}}€</h5>
+            
+            {# <ul>
+                {% for step in recipe.steps %}
+                    <li><strong>Step {{step.spot}}: </strong>{{step.description}}</li>
+                {% endfor %}
+            </ul> #}
+        </div>
+        <div class="btn-group-vertical acces" data-toggle="buttons">
+                <a href="{{ path('recipe_show', {'id': recipe.id}) }}" class="btn btn-primary">Accéder à la recette</a>
+            </div>
+    </div>
+{% endfor %}    
+</div>
+
+ <a href="{{ path('recipe_new') }}" class="btn btn-success m-auto d-block">Ajouter une recette</a>
+    {% endblock %}  

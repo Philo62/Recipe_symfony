@@ -1,5 +1,69 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Recipe</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Ingredients <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Notes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Coût Moyen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Avis</a>
+                </li>
+            </ul>
+
+                
+                <div class="mr-auto d-flex justify-content-around ">
+                {% if app.user %}
+                    <p class="mr-3" >Hello {{ app.user.username }}</p> 
+                    <a href="{{path('app_logout')}} ">Logout <i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                    <a href="{{path('app_login')}} " class="mr-2">Login <i class="fas fa-sign-in-alt"></i></a>
+                {% endif %}
+                   
+                  <a href="{{path('user_new')}}">Registration</a> 
+                </div>
+                
+            
+            {# <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" placeholder="Search" type="text">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> #}
+            </form>
+        </div>
+    </nav>
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block javascripts %}{% endblock %}
+</body>
+
+</html>
+
+{# <!DOCTYPE html>
+<html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -9,4 +73,4 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
-</html>
+</html> #}
